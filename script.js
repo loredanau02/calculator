@@ -12,6 +12,28 @@ let operator = null;
 let result = null;
 let shouldResetDisplay = false;
 
+function add(a, b) {
+    return a + b;
+}
+
+function subtract(a, b) {
+    return a - b;
+}
+
+function multiply(a, b) {
+    return a * b;
+}
+
+function divide(a, b) {
+    if (b !== 0) {
+        return a / b;
+    } else {
+        // TODO: let's leave this here for now and see what we wanna do about it
+        return console.log('Numbers cannot be divided by zero');
+        
+    }
+}
+
 function operate(operator, a, b) {
     switch (operator) {
         case '+':
