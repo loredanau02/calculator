@@ -1,5 +1,5 @@
 # Website Link 
-The project can be viewed by clicking here: 
+The project can be viewed by clicking here: https://loredanau02.github.io/calculator/
 
 # Calculator
 This project is a simple calculator application that allows users to perform arithmetic operations and handle multiple operations one at a time. It features a user-friendly interface, keyboard support, error handling, and the ability to hold decimal numbers. Users can enter numbers and operations in sequence, with the calculator evaluating each pair of numbers and updating the display with the intermediate result.
