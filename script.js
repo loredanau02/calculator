@@ -51,11 +51,11 @@ function multiply(a, b) {
 
 function divide(a, b) {
     if (b == 0) {
-        alert(`Nice try, but do not break my calculator next time!`);
+        alert(`Nice try, do not break my calculator next time!`);
         hasError = true;
-        return 'Error. Start over.';
+        return 'Error';
     }
-        return a / b;
+    return a / b;
 }
 
 function operate(operator, a, b) {
@@ -78,6 +78,7 @@ function handleNumberClick(number) {
         clearDisplay();
         hasError = false;
     }
+
     if (shouldResetDisplay) {
         displayValue = '';
         shouldResetDisplay = false;
@@ -99,18 +100,18 @@ function handleOperator(selectedOperator) {
         secondNumber = parseFloat(displayValue);
         const result = operate(operator, firstNumber, secondNumber);
 
-        if (result === 'Error. Start over.') {
+        if (result === 'Error') {
             updateResultDisplay(result);
             return;
+        }
+
+        updateResultDisplay(result);
+        firstNumber = result;
     }
 
-    updateResultDisplay(result);
-    firstNumber = result;
-}
-
-operator = selectedOperator;
-shouldResetDisplay = true;
-updateOperationDisplay('${firstNumber} ${operator}');
+    operator = selectedOperator;
+    shouldResetDisplay = true;
+    updateOperationDisplay(`${firstNumber} ${operator}`);
 }
 
 function handleEquals() {
@@ -118,7 +119,7 @@ function handleEquals() {
         secondNumber = parseFloat(displayValue);
         const result = operate(operator, firstNumber, secondNumber);
 
-        if(result === 'Error. Start over.') {
+        if (result === 'Error') {
             updateResultDisplay(result);
             return;
         }
@@ -132,14 +133,14 @@ function handleEquals() {
 }
 
 function handleBackspace() {
-    if(hasError) return;
+    if (hasError) return;
 
     displayValue = displayValue.slice(0, -1);
     updateResultDisplay(displayValue || '0');
 }
 
 function handleKeydown(e) {
-    if(hasError) return;
+    if (hasError) return;
 
     const key = e.key;
 
@@ -162,7 +163,7 @@ function updateOperationDisplay(operation) {
 
 function updateResultDisplay(result) {
     resultDisplay.textContent = result;
-    if(result === '0' || result === 'Error. Start over.') {
+    if (result === '0' || result === 'Error') {
         resultDisplay.classList.add('faded');
     } else {
         resultDisplay.classList.remove('faded');
