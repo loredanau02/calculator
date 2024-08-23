@@ -12,6 +12,7 @@ document.getElementById('clear').addEventListener('click', clearDisplay);
 
 
 const display = document.getElementById('display');
+// const OPERATOR_LIST = ['+', '-', '*', '/'];
 let displayValue = '';
 let firstNumber = null;
 let secondNumber = null;
@@ -75,9 +76,28 @@ function handleNumberClick(number) {
 }
 
 function handleOperator(selectedOperator) {
-    operate = operate;
-    displayValue = selectedOperator;
-    updateDisplay();
-    displayValue = '';
+    if (firstNumber === null) {
+        firstNumber = parseFloat(displayValue);
+        operator = selectedOperator;
+        displayValue = '';
+    } else if (operator && displayValue !== '') {
+        secondNumber = parseFloat(displayValue);
+        displayValue = operate(operator, firstNumber, secondNumber);
+        updateDisplay();
+        firstNumber = parseFloat(displayValue);
+        displayValue = '';
+        operator = selectedOperator;
+    }
 }
 
+// function handleEquals() {
+//     if (operator && OPERATOR_LIST.includes(displayValue)) {
+//         console.log('was clicked');
+//         secondOperand = parseFloat(displayValue);
+//         displayValue = operate(operator, firstOperand, secondOperand);
+//         updateDisplay();
+//         firstOperand = null;
+//         operator = null;
+//         displayValue = '';
+//     }
+// }
