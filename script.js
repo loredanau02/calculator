@@ -1,9 +1,5 @@
-document.querySelectorAll('.number').forEach(button => button.addEventListener('click', (e) => updateDisplay(e.target.textContent)));
-document.querySelectorAll('.operator').forEach(button => button.addEventListener('click', (e) => handleOperator(e.target.textContent)));
-document.querySelector('.equals').addEventListener('click', handleEquals);
-document.querySelector('.clear').addEventListener('click', clearDisplay);
-
-document.getElementById('clear').addEventListener('click', handleClearDisplay);
+document.getElementById('equals').addEventListener('click', handleEquals);
+document.getElementById('clear').addEventListener('click', clearDisplay);
 document.getElementById('backspace').addEventListener('click', handleBackspace);
 document.addEventListener('keydown', handleKeydown);
 
@@ -13,35 +9,32 @@ document.querySelectorAll('button[data-number]').forEach(button => {
         handleNumberClick(number);
     });
 });
+
 document.querySelectorAll('button[data-operator]').forEach(button => {
-    button.addEventListener('click', (e) => handleOperator(e.target.textContent))
+    button.addEventListener('click', (e) => handleOperator(e.target.textContent));
 });
-const display = document.querySelector('.display');
+
+const display = document.getElementById('display');
 const operationDisplay = display.querySelector('.operation');
 const resultDisplay = display.querySelector('.result');
-const themeToggle = document.getElementById('theme-toggle');
+let displayValue = '';
+let firstNumber = null;
+let secondNumber = null;
+let operator = null;
+let shouldResetDisplay = false;
 
+const themeToggle = document.getElementById('theme-toggle');
 themeToggle.addEventListener('change', () => {
     document.body.classList.toggle('dark');
     document.querySelector('main').classList.toggle('dark');
     document.querySelector('h1').classList.toggle('dark');
-    
+
     document.querySelectorAll('button').forEach(button => {
         button.classList.toggle('dark');
     });
 
     document.querySelector('section[aria-label="calculator display"]').classList.toggle('dark');
 });
-
-
-
-
-let displayValue = '';
-let firstNumber = null;
-let secondNumber = null;
-let operator = null;
-let result = null;
-let shouldResetDisplay = false;
 
 function add(a, b) {
     return a + b;
@@ -59,8 +52,7 @@ function divide(a, b) {
     if (b !== 0) {
         return a / b;
     } else {
-        return `Nice try, put your thinking cap on and don't break my calculator next time!`;
-        
+        return `Nice try, but do not break my calculator next time!`;
     }
 }
 
@@ -79,97 +71,88 @@ function operate(operator, a, b) {
     }
 }
 
-function handleClearDisplay() {
-    displayValue = '';
-    firstNumber = null;
-    secondNumber = null;
-    operator = null;
-    result = null;
-    display.textContent = '0';
-}
-
-function updateDisplay() {
-    document.getElementById('display').innerText = displayValue || '0';
-}
-
 function handleNumberClick(number) {
+    if (shouldResetDisplay) {
+        displayValue = '';
+        shouldResetDisplay = false;
+    }
+
     if (number === '.' && displayValue.includes('.')) {
         return;
     }
     displayValue += number;
-    updateDisplay();
+    updateResultDisplay(displayValue);
 }
 
 function handleOperator(selectedOperator) {
-    operator = selectedOperator;
-    
     if (firstNumber === null) {
         firstNumber = parseFloat(displayValue);
-        displayValue = '';
     } else if (operator && displayValue !== '') {
         secondNumber = parseFloat(displayValue);
-        displayValue = operate(operator, firstNumber, secondNumber);
-        updateDisplay();
-        firstNumber = parseFloat(displayValue);
-        displayValue = '';
-        operator = selectedOperator;
+        const result = operate(operator, firstNumber, secondNumber);
+        updateResultDisplay(result);
+        firstNumber = result;
     }
+
+    operator = selectedOperator;
+    shouldResetDisplay = true;
+    updateOperationDisplay(`${firstNumber} ${operator}`);
 }
 
 function handleEquals() {
     if (operator && displayValue !== '') {
         secondNumber = parseFloat(displayValue);
-        displayValue = operate(operator, firstNumber, secondNumber);
-        updateDisplay();
-        firstNumber = displayValue;
-        secondNumber = null;
+        const result = operate(operator, firstNumber, secondNumber);
+        updateResultDisplay(result);
+        updateOperationDisplay(`${firstNumber} ${operator} ${secondNumber} =`);
+        firstNumber = result;
         operator = null;
-        displayValue = '';
+        shouldResetDisplay = true;
     }
 }
 
 function handleBackspace() {
     displayValue = displayValue.slice(0, -1);
-    updateDisplay();
+    updateResultDisplay(displayValue || '0');
 }
 
 function handleKeydown(e) {
     const key = e.key;
 
-    switch (key) {
-        case '+':
-        case '-':
-        case '*':
-        case '/':
-            handleOperator(key);
-            break
-        case 'Enter':
-        case '=':
-            handleEquals();
-            break;
-        case 'Escape':
-            handleClearDisplay();
-            break;
-        default:
-            if (/^[0-9.]$/.test(key)) {
-                handleNumberClick(key);
-                break;
-            }
-            break;
+    if (/^[0-9.]$/.test(key)) {
+        handleNumberClick(key);
+    } else if (['+', '-', '*', '/'].includes(key)) {
+        handleOperator(key);
+    } else if (key === 'Enter' || key === '=') {
+        handleEquals();
+    } else if (key === 'Backspace') {
+        handleBackspace();
+    } else if (key === 'Escape') {
+        clearDisplay();
     }
 }
 
-function updateDisplay(operation = '', result = '') {
-    if (result === '') {
-        resultDisplay.textContent = '0';
-        resultDisplay.classList.add('faded');
-    } else {
-        resultDisplay.textContent = result;
-        resultDisplay.classList.remove('faded');
-    }
+function updateOperationDisplay(operation) {
     operationDisplay.textContent = operation;
 }
 
-function clearDisplay() {
-    updateDisplay('', '0');
+function updateResultDisplay(result) {
+    resultDisplay.textContent = result;
+    if (result === '0') {
+        resultDisplay.classList.add('faded');
+    } else {
+        resultDisplay.classList.remove('faded');
+    }
 }
+
+function clearDisplay() {
+    displayValue = '';
+    firstNumber = null;
+    secondNumber = null;
+    operator = null;
+    shouldResetDisplay = false;
+    updateOperationDisplay('');
+    updateResultDisplay('0');
+}
+
+clearDisplay();
