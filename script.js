@@ -9,6 +9,7 @@ document.querySelectorAll('button[data-operator]').forEach(button => {
 });
 document.getElementById('equals').addEventListener('click', handleEquals);
 document.getElementById('clear').addEventListener('click', clearDisplay);
+document.getElementById('backspace').addEventListener('click', handleBackspace);
 
 
 const display = document.getElementById('display');
@@ -66,7 +67,7 @@ function clearDisplay() {
 }
 
 function updateDisplay() {
-    document.getElementById('display').innerText = displayValue;
+    document.getElementById('display').innerText = displayValue || '0';
 }
 
 function handleNumberClick(number) {
@@ -100,4 +101,9 @@ function handleEquals() {
         operator = null;
         displayValue = '';
     }
+}
+
+function handleBackspace() {
+    displayValue = displayValue.slice(0, -1);
+    updateDisplay();
 }
