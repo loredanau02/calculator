@@ -8,9 +8,9 @@ document.querySelectorAll('button[data-operator]').forEach(button => {
     button.addEventListener('click', (e) => handleOperator(e.target.textContent))
 });
 document.getElementById('equals').addEventListener('click', handleEquals);
-document.getElementById('clear').addEventListener('click', clearDisplay);
+document.getElementById('clear').addEventListener('click', handleClearDisplay);
 document.getElementById('backspace').addEventListener('click', handleBackspace);
-
+document.addEventListener('keydown', handleKeydown);
 
 const display = document.getElementById('display');
 let displayValue = '';
@@ -57,7 +57,7 @@ function operate(operator, a, b) {
     }
 }
 
-function clearDisplay() {
+function handleClearDisplay() {
     displayValue = '';
     firstNumber = null;
     secondNumber = null;
@@ -106,4 +106,30 @@ function handleEquals() {
 function handleBackspace() {
     displayValue = displayValue.slice(0, -1);
     updateDisplay();
+}
+
+function handleKeydown(e) {
+    const key = e.key;
+
+    switch (key) {
+        case '+':
+        case '-':
+        case '*':
+        case '/':
+            handleOperator(key);
+            break
+        case 'Enter':
+        case '=':
+            handleEquals();
+            break;
+        case 'Escape':
+            handleClearDisplay();
+            break;
+        default:
+            if (/^[0-9]$/.test(key)) {
+                handleNumberClick(key);
+                break;
+            }
+            break;
+    }
 }
