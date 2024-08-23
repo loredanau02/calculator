@@ -52,7 +52,8 @@ function divide(a, b) {
     if (b !== 0) {
         return a / b;
     } else {
-        return `Nice try, but do not break my calculator next time!`;
+        alert(`Nice try, but do not break my calculator next time!`);
+        return 0;
     }
 }
 
@@ -154,5 +155,3 @@ function clearDisplay() {
     updateOperationDisplay('');
     updateResultDisplay('0');
 }
-
-clearDisplay();
