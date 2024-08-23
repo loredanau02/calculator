@@ -22,12 +22,9 @@ let firstNumber = null;
 let secondNumber = null;
 let operator = null;
 let shouldResetDisplay = false;
-<<<<<<< Updated upstream
-=======
 let hasError = false;
 
 const MAX_DISPLAY_LENGTH = 9;
->>>>>>> Stashed changes
 
 const themeToggle = document.getElementById('theme-toggle');
 themeToggle.addEventListener('change', () => {
@@ -96,9 +93,7 @@ function handleOperator(selectedOperator) {
     } else if (operator && displayValue !== '') {
         secondNumber = parseFloat(displayValue);
         const result = operate(operator, firstNumber, secondNumber);
-<<<<<<< Updated upstream
         updateResultDisplay(result);
-=======
 
         if (result === 'Error') {
             updateResultDisplay(result);
@@ -106,7 +101,6 @@ function handleOperator(selectedOperator) {
         }
 
         updateResultDisplay(formatResult(result));
->>>>>>> Stashed changes
         firstNumber = result;
     }
 
@@ -119,9 +113,7 @@ function handleEquals() {
     if (operator && displayValue !== '') {
         secondNumber = parseFloat(displayValue);
         const result = operate(operator, firstNumber, secondNumber);
-<<<<<<< Updated upstream
         updateResultDisplay(result);
-=======
 
         if (result === 'Error') {
             updateResultDisplay(result);
@@ -129,7 +121,6 @@ function handleEquals() {
         }
 
         updateResultDisplay(formatResult(result));
->>>>>>> Stashed changes
         updateOperationDisplay(`${firstNumber} ${operator} ${secondNumber} =`);
         firstNumber = result;
         operator = null;
@@ -174,16 +165,14 @@ function updateOperationDisplay(operation) {
 
 function updateResultDisplay(result) {
     resultDisplay.textContent = result;
-<<<<<<< Updated upstream
     if (result === '0') {
-=======
 
     if (result === '0' || result === 'Error') {
->>>>>>> Stashed changes
         resultDisplay.classList.add('faded');
     } else {
         resultDisplay.classList.remove('faded');
     }
+}
 }
 
 function clearDisplay() {
