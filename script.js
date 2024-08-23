@@ -1,10 +1,17 @@
-document.querySelectorAll('.number').forEach(button => button.addEventListener('click', (e) => updateDisplay(e.target.textContent)));
-document.querySelectorAll('.operator').forEach(button => button.addEventListener('click', (e) => handleOperator(e.target.textContent)));
-document.querySelector('.equals').addEventListener('click', handleEquals);
-document.querySelector('.clear').addEventListener('click', clearDisplay);
+document.querySelectorAll('button[data-number]').forEach(button => {
+    button.addEventListener('click', () => {
+        const number = button.innerText;
+        handleNumberClick(number);
+    });
+});
+// document.querySelectorAll('button[data-operator]').forEach(button => {
+//     button.addEventListener('click', (e) => handleOperator(e.target.textContent))
+// });
+// document.getElementById('equals').addEventListener('click', handleEquals);
+document.getElementById('clear').addEventListener('click', clearDisplay);
 
 
-const display = document.querySelector('.display');
+const display = document.getElementById('display');
 let displayValue = '';
 let firstNumber = null;
 let secondNumber = null;
@@ -57,3 +64,13 @@ function clearDisplay() {
     result = null;
     display.textContent = '0';
 }
+
+function updateDisplay() {
+    document.getElementById('display').innerText = displayValue;
+}
+
+function handleNumberClick(number) {
+    displayValue += number;
+    updateDisplay();
+}
+
