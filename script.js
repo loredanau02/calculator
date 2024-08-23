@@ -24,7 +24,7 @@ let operator = null;
 let shouldResetDisplay = false;
 let hasError = false;
 
-const MAX_DISPLAY_LENGTH = 9;
+const MAX_DISPLAY_LENGTH = 8;
 
 const themeToggle = document.getElementById('theme-toggle');
 themeToggle.addEventListener('change', () => {
