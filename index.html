@@ -9,11 +9,20 @@
 <body>
     <header>
         <h1>Calculator</h1>
+        <label class="theme-switch">
+            <input type="checkbox" id="theme-toggle">
+            <span class="slider"></span>
+            <span class="icon sun">☀️</span>
+            <span class="icon moon">🌙</span>
+        </label>
     </header>
-    
     <main>
         <section aria-label="calculator display">
-            <output id="display" aria-live="polite" role="status">0</output>
+            <output id="display" aria-live="polite" role="status">
+                <span class="operation"></span>
+                <span class="result faded">0</span>
+            </output>
+        </section>
         </section>
 
         <section aria-label="calculator controls">

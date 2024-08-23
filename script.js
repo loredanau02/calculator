@@ -1,3 +1,12 @@
+document.querySelectorAll('.number').forEach(button => button.addEventListener('click', (e) => updateDisplay(e.target.textContent)));
+document.querySelectorAll('.operator').forEach(button => button.addEventListener('click', (e) => handleOperator(e.target.textContent)));
+document.querySelector('.equals').addEventListener('click', handleEquals);
+document.querySelector('.clear').addEventListener('click', clearDisplay);
+
+document.getElementById('clear').addEventListener('click', handleClearDisplay);
+document.getElementById('backspace').addEventListener('click', handleBackspace);
+document.addEventListener('keydown', handleKeydown);
+
 document.querySelectorAll('button[data-number]').forEach(button => {
     button.addEventListener('click', () => {
         const number = button.innerText;
@@ -7,12 +16,26 @@ document.querySelectorAll('button[data-number]').forEach(button => {
 document.querySelectorAll('button[data-operator]').forEach(button => {
     button.addEventListener('click', (e) => handleOperator(e.target.textContent))
 });
-document.getElementById('equals').addEventListener('click', handleEquals);
-document.getElementById('clear').addEventListener('click', handleClearDisplay);
-document.getElementById('backspace').addEventListener('click', handleBackspace);
-document.addEventListener('keydown', handleKeydown);
+const display = document.querySelector('.display');
+const operationDisplay = display.querySelector('.operation');
+const resultDisplay = display.querySelector('.result');
+const themeToggle = document.getElementById('theme-toggle');
 
-const display = document.getElementById('display');
+themeToggle.addEventListener('change', () => {
+    document.body.classList.toggle('dark');
+    document.querySelector('main').classList.toggle('dark');
+    document.querySelector('h1').classList.toggle('dark');
+    
+    document.querySelectorAll('button').forEach(button => {
+        button.classList.toggle('dark');
+    });
+
+    document.querySelector('section[aria-label="calculator display"]').classList.toggle('dark');
+});
+
+
+
+
 let displayValue = '';
 let firstNumber = null;
 let secondNumber = null;
@@ -135,3 +158,17 @@ function handleKeydown(e) {
             break;
     }
 }
+
+function updateDisplay(operation = '', result = '') {
+    if (result === '') {
+        resultDisplay.textContent = '0';
+        resultDisplay.classList.add('faded');
+    } else {
+        resultDisplay.textContent = result;
+        resultDisplay.classList.remove('faded');
+    }
+    operationDisplay.textContent = operation;
+}
+
+function clearDisplay() {
+    updateDisplay('', '0');
