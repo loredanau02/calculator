@@ -36,8 +36,7 @@ function divide(a, b) {
     if (b !== 0) {
         return a / b;
     } else {
-        // TODO: let's leave this here for now and see what we wanna do about it
-        return console.log('Numbers cannot be divided by zero');
+        return `Nice try, put your thinking cap on and don't break my calculator next time!`;
         
     }
 }
