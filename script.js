@@ -22,6 +22,12 @@ let firstNumber = null;
 let secondNumber = null;
 let operator = null;
 let shouldResetDisplay = false;
+<<<<<<< Updated upstream
+=======
+let hasError = false;
+
+const MAX_DISPLAY_LENGTH = 9;
+>>>>>>> Stashed changes
 
 const themeToggle = document.getElementById('theme-toggle');
 themeToggle.addEventListener('change', () => {
@@ -90,7 +96,17 @@ function handleOperator(selectedOperator) {
     } else if (operator && displayValue !== '') {
         secondNumber = parseFloat(displayValue);
         const result = operate(operator, firstNumber, secondNumber);
+<<<<<<< Updated upstream
         updateResultDisplay(result);
+=======
+
+        if (result === 'Error') {
+            updateResultDisplay(result);
+            return;
+        }
+
+        updateResultDisplay(formatResult(result));
+>>>>>>> Stashed changes
         firstNumber = result;
     }
 
@@ -103,7 +119,17 @@ function handleEquals() {
     if (operator && displayValue !== '') {
         secondNumber = parseFloat(displayValue);
         const result = operate(operator, firstNumber, secondNumber);
+<<<<<<< Updated upstream
         updateResultDisplay(result);
+=======
+
+        if (result === 'Error') {
+            updateResultDisplay(result);
+            return;
+        }
+
+        updateResultDisplay(formatResult(result));
+>>>>>>> Stashed changes
         updateOperationDisplay(`${firstNumber} ${operator} ${secondNumber} =`);
         firstNumber = result;
         operator = null;
@@ -132,13 +158,28 @@ function handleKeydown(e) {
     }
 }
 
+function formatResult(result) {
+    if (Math.abs(result) > Math.pow(10, MAX_DISPLAY_LENGTH) || (result !== 0 && Math.abs(result) < 1e-10)) {
+        return result.toExponential(10);
+    }
+
+    return result.toString().length > MAX_DISPLAY_LENGTH 
+        ? result.toPrecision(MAX_DISPLAY_LENGTH - 2) 
+        : result;
+}
+
 function updateOperationDisplay(operation) {
     operationDisplay.textContent = operation;
 }
 
 function updateResultDisplay(result) {
     resultDisplay.textContent = result;
+<<<<<<< Updated upstream
     if (result === '0') {
+=======
+
+    if (result === '0' || result === 'Error') {
+>>>>>>> Stashed changes
         resultDisplay.classList.add('faded');
     } else {
         resultDisplay.classList.remove('faded');
