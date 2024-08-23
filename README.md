@@ -34,5 +34,5 @@ Chained Calculations: After entering a pair of numbers and an operator, the resu
 * C or Escape to clear the calculator.
 
 # Error Handling 
-Dividing by zero will show you the message 'Nice try, but don't break my calculator next time!' instead of showing you an error message.
+Dividing by zero will show you the message 'Nice try, but do not break my calculator next time!' instead of showing you an error message.
 Also, the calculator will prevent multiple decimal points in a single number.
