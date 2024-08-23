@@ -4,9 +4,9 @@ document.querySelectorAll('button[data-number]').forEach(button => {
         handleNumberClick(number);
     });
 });
-// document.querySelectorAll('button[data-operator]').forEach(button => {
-//     button.addEventListener('click', (e) => handleOperator(e.target.textContent))
-// });
+document.querySelectorAll('button[data-operator]').forEach(button => {
+    button.addEventListener('click', (e) => handleOperator(e.target.textContent))
+});
 // document.getElementById('equals').addEventListener('click', handleEquals);
 document.getElementById('clear').addEventListener('click', clearDisplay);
 
@@ -72,5 +72,12 @@ function updateDisplay() {
 function handleNumberClick(number) {
     displayValue += number;
     updateDisplay();
+}
+
+function handleOperator(selectedOperator) {
+    operate = operate;
+    displayValue = selectedOperator;
+    updateDisplay();
+    displayValue = '';
 }
 
