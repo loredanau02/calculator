@@ -1,17 +1,12 @@
-<<<<<<< Updated upstream
 document.querySelectorAll('.number').forEach(button => button.addEventListener('click', (e) => updateDisplay(e.target.textContent)));
 document.querySelectorAll('.operator').forEach(button => button.addEventListener('click', (e) => handleOperator(e.target.textContent)));
 document.querySelector('.equals').addEventListener('click', handleEquals);
 document.querySelector('.clear').addEventListener('click', clearDisplay);
 
-
-const display = document.querySelector('.display');
-=======
-
-document.getElementById('equals').addEventListener('click', handleEquals);
 document.getElementById('clear').addEventListener('click', handleClearDisplay);
 document.getElementById('backspace').addEventListener('click', handleBackspace);
 document.addEventListener('keydown', handleKeydown);
+
 document.querySelectorAll('button[data-number]').forEach(button => {
     button.addEventListener('click', () => {
         const number = button.innerText;
@@ -21,8 +16,7 @@ document.querySelectorAll('button[data-number]').forEach(button => {
 document.querySelectorAll('button[data-operator]').forEach(button => {
     button.addEventListener('click', (e) => handleOperator(e.target.textContent))
 });
-
-const display = document.getElementById('display');
+const display = document.querySelector('.display');
 const operationDisplay = display.querySelector('.operation');
 const resultDisplay = display.querySelector('.result');
 const themeToggle = document.getElementById('theme-toggle');
@@ -39,7 +33,9 @@ themeToggle.addEventListener('change', () => {
     document.querySelector('section[aria-label="calculator display"]').classList.toggle('dark');
 });
 
->>>>>>> Stashed changes
+
+
+
 let displayValue = '';
 let firstNumber = null;
 let secondNumber = null;
@@ -47,8 +43,6 @@ let operator = null;
 let result = null;
 let shouldResetDisplay = false;
 
-<<<<<<< Updated upstream
-=======
 function add(a, b) {
     return a + b;
 }
@@ -65,12 +59,11 @@ function divide(a, b) {
     if (b !== 0) {
         return a / b;
     } else {
-        return `Nice try, but don't break my calculator next time!`;
+        return `Nice try, put your thinking cap on and don't break my calculator next time!`;
         
     }
 }
 
->>>>>>> Stashed changes
 function operate(operator, a, b) {
     switch (operator) {
         case '+':
@@ -86,15 +79,13 @@ function operate(operator, a, b) {
     }
 }
 
-function clearDisplay() {
+function handleClearDisplay() {
     displayValue = '';
     firstNumber = null;
     secondNumber = null;
     operator = null;
     result = null;
     display.textContent = '0';
-<<<<<<< Updated upstream
-=======
 }
 
 function updateDisplay() {
@@ -181,5 +172,3 @@ function updateDisplay(operation = '', result = '') {
 
 function clearDisplay() {
     updateDisplay('', '0');
->>>>>>> Stashed changes
-}

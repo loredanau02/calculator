@@ -1,5 +1,5 @@
 # Website Link 
-The project can be viewed by clicking here: 
+The project can be viewed by clicking here: https://loredanau02.github.io/calculator/
 
 # Calculator
 This project is a simple calculator application that allows users to perform arithmetic operations and handle multiple operations one at a time. It features a user-friendly interface, keyboard support, error handling, and the ability to hold decimal numbers. Users can enter numbers and operations in sequence, with the calculator evaluating each pair of numbers and updating the display with the intermediate result.
@@ -34,5 +34,5 @@ Chained Calculations: After entering a pair of numbers and an operator, the resu
 * C or Escape to clear the calculator.
 
 # Error Handling 
-Dividing by zero will show you the message 'Nice try, put your thinking cap on and don't break my calculator next time!' instead of showing you an error message.
+Dividing by zero will show you the message 'Nice try, but don't break my calculator next time!' instead of showing you an error message.
 Also, the calculator will prevent multiple decimal points in a single number.
