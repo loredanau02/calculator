@@ -172,3 +172,4 @@ function updateDisplay(operation = '', result = '') {
 
 function clearDisplay() {
     updateDisplay('', '0');
+}
