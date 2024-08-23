@@ -70,6 +70,9 @@ function updateDisplay() {
 }
 
 function handleNumberClick(number) {
+    if (number === '.' && displayValue.includes('.')) {
+        return;
+    }
     displayValue += number;
     updateDisplay();
 }
@@ -125,7 +128,7 @@ function handleKeydown(e) {
             handleClearDisplay();
             break;
         default:
-            if (/^[0-9]$/.test(key)) {
+            if (/^[0-9.]$/.test(key)) {
                 handleNumberClick(key);
                 break;
             }
