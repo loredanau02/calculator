@@ -79,7 +79,6 @@ function handleOperator(selectedOperator) {
     
     if (firstNumber === null) {
         firstNumber = parseFloat(displayValue);
-        operator = selectedOperator;
         displayValue = '';
     } else if (operator && displayValue !== '') {
         secondNumber = parseFloat(displayValue);
