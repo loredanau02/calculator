@@ -53,7 +53,7 @@ function divide(a, b) {
         return a / b;
     } else {
         alert(`Nice try, but do not break my calculator next time!`);
-        return null;
+        return 0;
     }
 }
 
