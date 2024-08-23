@@ -75,9 +75,10 @@ function handleNumberClick(number) {
 }
 
 function handleOperator(selectedOperator) {
+    operator = selectedOperator;
+    
     if (firstNumber === null) {
         firstNumber = parseFloat(displayValue);
-        operator = selectedOperator;
         displayValue = '';
     } else if (operator && displayValue !== '') {
         secondNumber = parseFloat(displayValue);
@@ -94,7 +95,9 @@ function handleEquals() {
         secondNumber = parseFloat(displayValue);
         displayValue = operate(operator, firstNumber, secondNumber);
         updateDisplay();
-        firstNumber = null;
+        firstNumber = displayValue;
+        secondNumber = null;
         operator = null;
+        displayValue = '';
     }
 }
